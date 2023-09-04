@@ -34,7 +34,7 @@ func Ports(ips []string) map[string][]int {
 		threads = threads/2
 	}
 	for _, ip := range ips {
-		ports[ip] = coldfire.Portscan(ip, 3600, threads)
+		ports[ip] = coldfire.Portscan(ip, 1, threads)
 	}
 	return ports
 }
