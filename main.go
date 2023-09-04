@@ -2,6 +2,8 @@ package main
 
 import (
 	"nofiles/antiav"
+	"nofiles/mail"
+
 	"log"
 )
 
@@ -19,7 +21,21 @@ func main() {
 //	}
 //	ports := antiav.Ports(ips)
 
-	antiav.After()
+	email := &mail.Email{
+		From:       "user@example.org",
+		Password:   "example",
+		ServerHost: "example.org",
+		ServerPort: "587",
+		To:         []string{"recepient@example.com"},
+		Subject:    "Test Email",
+		Body:       "This is a test email.",
+	}
+	err = email.Send()
+	if err != nil {
+		log.Println("Cannot send email:", err)
+	}
+
+	err = antiav.After()
 	if err != nil {
 		log.Println("Finishing failed:", err)
 	}
